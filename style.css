@@ -1,0 +1,259 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec, #fff5f7);
+    color: #75223f;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* هدر سایت */
+
+header {
+    text-align: center;
+    padding: 55px 20px 35px;
+    background: linear-gradient(135deg, #ff4d79, #e91e63);
+    color: white;
+    border-radius: 0 0 45px 45px;
+    box-shadow: 0 8px 30px #e91e6340;
+}
+
+header h1 {
+    font-size: clamp(38px, 8vw, 65px);
+    font-weight: 900;
+}
+
+header h1 span {
+    color: #ffe0e8;
+    animation: heartbeat 1.2s infinite;
+    display: inline-block;
+}
+
+header p {
+    margin-top: 12px;
+    font-size: 17px;
+}
+
+/* صفحه اصلی */
+
+.hero {
+    text-align: center;
+    max-width: 750px;
+    margin: 75px auto;
+    padding: 30px 22px;
+}
+
+.heart-icon {
+    font-size: 85px;
+    animation: heartbeat 1.2s infinite;
+    margin-bottom: 20px;
+}
+
+.hero h2 {
+    font-size: clamp(25px, 5vw, 36px);
+    margin-bottom: 20px;
+    color: #d81b60;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 2.4;
+    color: #814158;
+}
+
+.love-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 35px;
+    background: linear-gradient(135deg, #ff4778, #e91e63);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 7px 20px #e91e6350;
+    transition: 0.3s;
+}
+
+.love-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px #e91e6370;
+}
+
+/* شمارشگر */
+
+.counter-section {
+    text-align: center;
+    margin: 50px 20px;
+    padding: 45px 20px;
+    background: #ffffffc9;
+    border: 1px solid #ffc2d4;
+    border-radius: 30px;
+    box-shadow: 0 10px 35px #e91e6315;
+}
+
+.counter-section h2 {
+    color: #d81b60;
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+.counter {
+    font-size: clamp(20px, 5vw, 34px);
+    font-weight: 900;
+    color: #e91e63;
+    line-height: 2;
+}
+
+.counter-section p {
+    margin-top: 20px;
+}
+
+/* گالری */
+
+.memories {
+    text-align: center;
+    padding: 45px 20px;
+}
+
+.memories h2,
+.letter h2 {
+    color: #d81b60;
+    font-size: 26px;
+    margin-bottom: 30px;
+}
+
+.gallery {
+    max-width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.photo-placeholder {
+    min-height: 220px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #ffc2d4, #ff8eae);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 23px;
+    box-shadow: 0 8px 20px #e91e6320;
+    transition: 0.3s;
+}
+
+.photo-placeholder:hover {
+    transform: scale(1.04);
+}
+
+/* نامه عاشقانه */
+
+.letter {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 40px 20px;
+    text-align: center;
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 10px 35px #e91e6318;
+}
+
+.letter p {
+    line-height: 2.5;
+    font-size: 17px;
+    margin-bottom: 25px;
+}
+
+.letter button {
+    border: none;
+    padding: 14px 30px;
+    border-radius: 40px;
+    background: #e91e63;
+    color: white;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.letter button:hover {
+    background: #ad1457;
+    transform: scale(1.05);
+}
+
+/* قلب های شناور */
+
+.hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -50px;
+    animation: floatUp linear forwards;
+    opacity: 0.65;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* فوتر */
+
+footer {
+    background: linear-gradient(135deg, #e91e63, #ad1457);
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+    margin-top: 70px;
+    line-height: 2.5;
+    border-radius: 35px 35px 0 0;
+}
+
+/* موبایل */
+
+@media (max-width: 600px) {
+    header {
+        padding: 40px 15px;
+    }
+
+    .hero {
+        margin: 45px auto;
+    }
+
+    .counter-section {
+        padding: 30px 12px;
+    }
+
+    .letter {
+        margin: 35px 15px;
+    }
+}
