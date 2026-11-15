@@ -1,15 +1,42 @@
 
-// تاریخ آشنایی سنا و علی
+// ======================================
+// سایت عاشقانه سنا و علی ❤️
+// ======================================
+
+
+// تاریخ آشنایی: ۲۴ آبان ۱۴۰۴
 const startDate = new Date(2025, 10, 15, 0, 0, 0);
 
-// شمارشگر عاشقانه
-function updateTimer() {
-    const now = new Date();
-    const difference = now - startDate;
 
+// ======================================
+// شمارشگر عاشقانه
+// ======================================
+
+function createTimeBox(value, label) {
+    return `
+        <div style="
+            min-width:75px;
+            padding:15px 10px;
+            border:1px solid rgba(255,79,145,.4);
+            background:rgba(255,79,145,.10);
+            border-radius:15px;
+        ">
+            <div style="font-size:28px;font-weight:800;color:#ff83b5">
+                ${value}
+            </div>
+            <div style="font-size:13px;color:#c7aeba">
+                ${label}
+            </div>
+        </div>
+    `;
+}
+
+function updateTimer() {
     const timer = document.getElementById("timer");
 
     if (!timer) return;
+
+    const difference = Date.now() - startDate.getTime();
 
     if (difference < 0) {
         timer.textContent = "به زودی داستان ما آغاز می‌شود ❤️";
@@ -40,31 +67,14 @@ function updateTimer() {
     `;
 }
 
-function createTimeBox(value, label) {
-    return `
-        <div style="
-            min-width:75px;
-            padding:15px 10px;
-            border:1px solid rgba(255,79,145,.4);
-            background:rgba(255,79,145,.10);
-            border-radius:15px;
-            box-shadow:0 0 20px rgba(255,79,145,.08);
-        ">
-            <div style="font-size:28px;font-weight:800;color:#ff83b5;">
-                ${value}
-            </div>
-            <div style="font-size:13px;color:#c7aeba;">
-                ${label}
-            </div>
-        </div>
-    `;
-}
-
 updateTimer();
 setInterval(updateTimer, 1000);
 
 
+// ======================================
 // قلب‌های شناور
+// ======================================
+
 function createFloatingHeart() {
     const heart = document.createElement("div");
 
@@ -82,44 +92,28 @@ function createFloatingHeart() {
     }, 11000);
 }
 
-setInterval(createFloatingHeart, 650);
+setInterval(createFloatingHeart, 900);
 
 
+// ======================================
 // نامه عاشقانه
+// ======================================
+
 function openLetter() {
-    const message = `
-سنا و علی ❤️
-
-بعضی داستان‌ها با یک سلام شروع می‌شوند،
-اما ارزششان به تمام لحظه‌هایی است که بعد از آن می‌سازیم.
-
-امیدواریم هر روزمان،
-یک دلیل تازه برای لبخند زدن داشته باشد.
-
-با عشق،
-از طرف هر دوی ما ♥
-    `;
-
-    alert(message);
+    alert(
+        "سنا و علی ❤️\n\n" +
+        "بعضی داستان‌ها با یک سلام شروع می‌شوند،\n" +
+        "اما ارزششان به تمام لحظه‌هایی است که می‌سازیم.\n\n" +
+        "بهترین قسمت داستان ما،\n" +
+        "صفحه‌هایی است که هنوز نرسیده‌اند...\n\n" +
+        "با عشق، از طرف هر دوی ما ♥"
+    );
 }
 
 
-// حرکت نرم به بخش‌های سایت
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener("click", function(event) {
-        const target = document.querySelector(this.getAttribute("href"));
-
-        if (target) {
-            event.preventDefault();
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }
-    });
-});
-
-console.log("Sena & Ali Love Website is running ❤️");
+// ======================================
+// باز و بسته کردن پاکت نامه
+// ======================================
 
 function toggleEnvelope() {
     const envelope = document.getElementById("loveEnvelope");
@@ -129,106 +123,176 @@ function toggleEnvelope() {
     }
 }
 
-// کنترل کامل موسیقی سنا و علی
 
-const loveAudio = document.getElementById("loveAudio");
-const musicToggle = document.getElementById("musicToggle");
-const musicProgress = document.getElementById("musicProgress");
-const volumeControl = document.getElementById("volumeControl");
-const currentTimeDisplay = document.getElementById("currentTime");
-const durationDisplay = document.getElementById("duration");
-const musicCover = document.querySelector(".music-cover");
+// ======================================
+// پخش‌کننده موسیقی
+// ======================================
 
-if (
-    loveAudio &&
-    musicToggle &&
-    musicProgress &&
-    volumeControl
-) {
-    // تنظیم صدای اولیه
-    loveAudio.volume = Number(volumeControl.value);
+document.addEventListener("DOMContentLoaded", function () {
 
-    // تبدیل زمان به دقیقه و ثانیه
-    function formatMusicTime(time) {
-        if (!Number.isFinite(time)) return "00:00";
+    const audio = document.getElementById("loveAudio");
+    const toggle = document.getElementById("musicToggle");
+    const progress = document.getElementById("musicProgress");
+    const volume = document.getElementById("volumeControl");
 
-        const minutes = Math.floor(time / 60);
-        const seconds = Math.floor(time % 60);
+    const currentTime = document.getElementById("currentTime");
+    const duration = document.getElementById("duration");
+    const cover = document.getElementById("musicCover");
+    const status = document.getElementById("musicStatus");
+
+    if (!audio || !toggle || !progress || !volume) {
+        return;
+    }
+
+    audio.volume = Number(volume.value);
+
+    function formatTime(seconds) {
+        if (!Number.isFinite(seconds)) {
+            return "00:00";
+        }
+
+        const min = Math.floor(seconds / 60);
+        const sec = Math.floor(seconds % 60);
 
         return (
-            String(minutes).padStart(2, "0") +
+            String(min).padStart(2, "0") +
             ":" +
-            String(seconds).padStart(2, "0")
+            String(sec).padStart(2, "0")
         );
     }
 
-    // پخش و توقف موسیقی
-    musicToggle.addEventListener("click", async function () {
-        if (loveAudio.paused) {
+    // آماده شدن آهنگ
+    audio.addEventListener("loadedmetadata", function () {
+        duration.textContent = formatTime(audio.duration);
+        status.textContent = "آهنگ آماده پخش است ❤️";
+    });
+
+    // بررسی خطای فایل
+    audio.addEventListener("error", function () {
+        status.textContent = "فایل آهنگ پیدا نشد؛ نام و مسیر آن را بررسی کن.";
+        console.error("Audio error:", audio.error);
+    });
+
+    // دکمه پخش و توقف
+    toggle.addEventListener("click", async function () {
+
+        if (audio.paused) {
+
             try {
-                await loveAudio.play();
+                await audio.play();
             } catch (error) {
-                console.error("خطا در پخش موسیقی:", error);
-                alert("فایل موسیقی پیدا نشد یا قابل پخش نیست.");
+
+                status.textContent =
+                    "پخش انجام نشد؛ فایل موسیقی را بررسی کن.";
+
+                console.error("Playback error:", error);
             }
+
         } else {
-            loveAudio.pause();
-        }
-    });
-
-    // تغییر ظاهر دکمه هنگام پخش یا توقف
-    loveAudio.addEventListener("play", function () {
-        musicToggle.textContent = "⏸ توقف موسیقی";
-
-        if (musicCover) {
-            musicCover.classList.add("playing");
-        }
-    });
-
-    loveAudio.addEventListener("pause", function () {
-        musicToggle.textContent = "▶ پخش موسیقی";
-
-        if (musicCover) {
-            musicCover.classList.remove("playing");
-        }
-    });
-
-    // نمایش مدت زمان آهنگ
-    loveAudio.addEventListener("loadedmetadata", function () {
-        durationDisplay.textContent =
-            formatMusicTime(loveAudio.duration);
-    });
-
-    // به‌روزرسانی نوار پیشرفت
-    loveAudio.addEventListener("timeupdate", function () {
-        if (Number.isFinite(loveAudio.duration)) {
-            musicProgress.value =
-                (loveAudio.currentTime / loveAudio.duration) * 100;
+            audio.pause();
         }
 
-        currentTimeDisplay.textContent =
-            formatMusicTime(loveAudio.currentTime);
     });
 
-    // جلو و عقب بردن آهنگ
-    musicProgress.addEventListener("input", function () {
-        if (Number.isFinite(loveAudio.duration)) {
-            loveAudio.currentTime =
-                (Number(musicProgress.value) / 100) *
-                loveAudio.duration;
+    // شروع پخش
+    audio.addEventListener("play", function () {
+
+        toggle.textContent = "⏸ توقف موسیقی";
+        status.textContent = "در حال پخش موسیقی عاشقانه ❤️";
+
+        if (cover) {
+            cover.classList.add("playing");
         }
+
     });
 
-    // تنظیم صدا
-    volumeControl.addEventListener("input", function () {
-        loveAudio.volume = Number(volumeControl.value);
+    // توقف پخش
+    audio.addEventListener("pause", function () {
+
+        toggle.textContent = "▶ پخش موسیقی";
+
+        if (cover) {
+            cover.classList.remove("playing");
+        }
+
+    });
+
+    // به‌روزرسانی زمان
+    audio.addEventListener("timeupdate", function () {
+
+        if (Number.isFinite(audio.duration) && audio.duration > 0) {
+
+            progress.value =
+                (audio.currentTime / audio.duration) * 100;
+
+        }
+
+        currentTime.textContent =
+            formatTime(audio.currentTime);
+
+    });
+
+    // حرکت نوار آهنگ
+    progress.addEventListener("input", function () {
+
+        if (Number.isFinite(audio.duration)) {
+
+            audio.currentTime =
+                (Number(progress.value) / 100) * audio.duration;
+
+        }
+
+    });
+
+    // کنترل صدا
+    volume.addEventListener("input", function () {
+        audio.volume = Number(volume.value);
     });
 
     // پایان آهنگ
-    loveAudio.addEventListener("ended", function () {
-        musicProgress.value = 0;
-        currentTimeDisplay.textContent = "00:00";
+    audio.addEventListener("ended", function () {
+
+        progress.value = 0;
+        currentTime.textContent = "00:00";
+
+        toggle.textContent = "▶ پخش دوباره";
+        status.textContent = "آهنگ تمام شد؛ دوباره گوش کن ❤️";
+
+        if (cover) {
+            cover.classList.remove("playing");
+        }
+
     });
 
-    console.log("Music Player Ready ❤️");
-}
+});
+
+
+// ======================================
+// حرکت نرم بین بخش‌های سایت
+// ======================================
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+
+    link.addEventListener("click", function (event) {
+
+        const target = document.querySelector(
+            this.getAttribute("href")
+        );
+
+        if (target) {
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+    });
+
+});
+
+
+console.log("Sena & Ali Love Website is running ❤️");
