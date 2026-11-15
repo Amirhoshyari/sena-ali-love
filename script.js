@@ -145,22 +145,24 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // آدرس صحیح فایل موسیقی در ریشه پروژه
+    // مسیر مستقیم فایل موسیقی
     const AUDIO_URL = new URL(
         "./love-song.mp3",
-        window.location.href
+        document.baseURI
     ).href;
 
-    // تنظیم صدا
-    audio.volume = Number(volume.value);
+    audio.pause();
+    audio.removeAttribute("src");
 
-    // آدرس فایل را مستقیم تنظیم می‌کنیم
     audio.src = AUDIO_URL;
+    audio.preload = "auto";
     audio.load();
+
+    audio.volume = Number(volume.value);
 
     console.log("Music URL:", AUDIO_URL);
 
-    // تبدیل زمان به دقیقه و ثانیه
+    // تبدیل زمان
     function formatTime(seconds) {
 
         if (!Number.isFinite(seconds)) {
@@ -185,38 +187,38 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         status.textContent = "آهنگ آماده پخش است ❤️";
+
     });
 
     // آماده شدن برای پخش
     audio.addEventListener("canplay", function () {
+
         status.textContent = "آهنگ آماده پخش است ❤️";
+
     });
 
-    // در حال بارگذاری
+    // شروع بارگذاری
     audio.addEventListener("loadstart", function () {
+
         status.textContent = "در حال بارگذاری آهنگ... 🎵";
+
     });
 
-    // انتظار برای دریافت اطلاعات بیشتر
-    audio.addEventListener("waiting", function () {
-        status.textContent = "در حال بارگذاری موسیقی... لطفاً صبر کن";
-    });
-
-    // خطای واقعی بارگذاری فایل
+    // خطای بارگذاری
     audio.addEventListener("error", function () {
 
         const errorCode = audio.error ? audio.error.code : 0;
 
         console.error("Audio error code:", errorCode);
-        console.error("Audio source:", audio.currentSrc);
+        console.error("Audio URL:", audio.currentSrc);
 
         if (errorCode === 2) {
             status.textContent =
-                "مشکل ارتباط با سرور؛ اینترنت را بررسی کن.";
+                "خطای ارتباط با سرور؛ اینترنت را بررسی کن.";
         }
         else if (errorCode === 3) {
             status.textContent =
-                "فایل دریافت شد اما رمزگشایی آهنگ ناموفق بود.";
+                "خطای رمزگشایی فایل موسیقی.";
         }
         else if (errorCode === 4) {
             status.textContent =
@@ -224,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         else {
             status.textContent =
-                "بارگذاری آهنگ ناموفق بود؛ دوباره تلاش کن.";
+                "خطای بارگذاری آهنگ؛ دوباره تلاش کن.";
         }
 
     });
@@ -234,33 +236,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (audio.paused) {
 
-            status.textContent = "در حال آماده‌سازی موسیقی...";
+            toggle.disabled = true;
+            status.textContent = "در حال آماده‌سازی آهنگ...";
 
             try {
 
-                // اگر فایل هنوز آماده نیست، دوباره بارگذاری شود
-                if (audio.networkState === HTMLMediaElement.NETWORK_EMPTY) {
-                    audio.load();
-                }
-
                 await audio.play();
+
+                status.textContent =
+                    "در حال پخش موسیقی عاشقانه ❤️";
 
             } catch (error) {
 
                 console.error("Playback error:", error);
 
-                if (error.name === "NotAllowedError") {
-                    status.textContent =
-                        "مرورگر اجازه پخش نداد؛ دوباره روی پخش بزن.";
-                }
-                else if (error.name === "NotSupportedError") {
-                    status.textContent =
-                        "فرمت فایل موسیقی پشتیبانی نمی‌شود.";
-                }
-                else {
-                    status.textContent =
-                        "پخش آهنگ انجام نشد؛ دوباره تلاش کن.";
-                }
+                status.textContent =
+                    "خطای پخش: " +
+                    error.name +
+                    " - " +
+                    error.message;
+
+            } finally {
+
+                toggle.disabled = false;
 
             }
 
@@ -276,7 +274,9 @@ document.addEventListener("DOMContentLoaded", function () {
     audio.addEventListener("play", function () {
 
         toggle.textContent = "⏸ توقف موسیقی";
-        status.textContent = "در حال پخش موسیقی عاشقانه ❤️";
+
+        status.textContent =
+            "در حال پخش موسیقی عاشقانه ❤️";
 
         if (cover) {
             cover.classList.add("playing");
@@ -347,7 +347,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         toggle.textContent = "▶ پخش دوباره";
-        status.textContent = "آهنگ تمام شد؛ دوباره گوش کن ❤️";
+
+        status.textContent =
+            "آهنگ تمام شد؛ دوباره گوش کن ❤️";
 
         if (cover) {
             cover.classList.remove("playing");
