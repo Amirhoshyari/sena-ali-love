@@ -140,13 +140,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const cover = document.getElementById("musicCover");
     const status = document.getElementById("musicStatus");
 
-    if (!audio || !toggle || !progress || !volume) {
+    if (!audio || !toggle || !progress || !volume || !status) {
+        console.error("Music player elements not found.");
         return;
     }
 
+    // آدرس صحیح فایل موسیقی در ریشه پروژه
+    const AUDIO_URL = new URL(
+        "./love-song.mp3",
+        window.location.href
+    ).href;
+
+    // تنظیم صدا
     audio.volume = Number(volume.value);
 
+    // آدرس فایل را مستقیم تنظیم می‌کنیم
+    audio.src = AUDIO_URL;
+    audio.load();
+
+    console.log("Music URL:", AUDIO_URL);
+
+    // تبدیل زمان به دقیقه و ثانیه
     function formatTime(seconds) {
+
         if (!Number.isFinite(seconds)) {
             return "00:00";
         }
@@ -161,16 +177,56 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
-    // آماده شدن آهنگ
+    // بارگذاری اطلاعات آهنگ
     audio.addEventListener("loadedmetadata", function () {
-        duration.textContent = formatTime(audio.duration);
+
+        if (duration) {
+            duration.textContent = formatTime(audio.duration);
+        }
+
         status.textContent = "آهنگ آماده پخش است ❤️";
     });
 
-    // بررسی خطای فایل
+    // آماده شدن برای پخش
+    audio.addEventListener("canplay", function () {
+        status.textContent = "آهنگ آماده پخش است ❤️";
+    });
+
+    // در حال بارگذاری
+    audio.addEventListener("loadstart", function () {
+        status.textContent = "در حال بارگذاری آهنگ... 🎵";
+    });
+
+    // انتظار برای دریافت اطلاعات بیشتر
+    audio.addEventListener("waiting", function () {
+        status.textContent = "در حال بارگذاری موسیقی... لطفاً صبر کن";
+    });
+
+    // خطای واقعی بارگذاری فایل
     audio.addEventListener("error", function () {
-        status.textContent = "فایل آهنگ پیدا نشد؛ نام و مسیر آن را بررسی کن.";
-        console.error("Audio error:", audio.error);
+
+        const errorCode = audio.error ? audio.error.code : 0;
+
+        console.error("Audio error code:", errorCode);
+        console.error("Audio source:", audio.currentSrc);
+
+        if (errorCode === 2) {
+            status.textContent =
+                "مشکل ارتباط با سرور؛ اینترنت را بررسی کن.";
+        }
+        else if (errorCode === 3) {
+            status.textContent =
+                "فایل دریافت شد اما رمزگشایی آهنگ ناموفق بود.";
+        }
+        else if (errorCode === 4) {
+            status.textContent =
+                "فرمت یا آدرس فایل موسیقی قابل پخش نیست.";
+        }
+        else {
+            status.textContent =
+                "بارگذاری آهنگ ناموفق بود؛ دوباره تلاش کن.";
+        }
+
     });
 
     // دکمه پخش و توقف
@@ -178,18 +234,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (audio.paused) {
 
+            status.textContent = "در حال آماده‌سازی موسیقی...";
+
             try {
+
+                // اگر فایل هنوز آماده نیست، دوباره بارگذاری شود
+                if (audio.networkState === HTMLMediaElement.NETWORK_EMPTY) {
+                    audio.load();
+                }
+
                 await audio.play();
+
             } catch (error) {
 
-                status.textContent =
-                    "پخش انجام نشد؛ فایل موسیقی را بررسی کن.";
-
                 console.error("Playback error:", error);
+
+                if (error.name === "NotAllowedError") {
+                    status.textContent =
+                        "مرورگر اجازه پخش نداد؛ دوباره روی پخش بزن.";
+                }
+                else if (error.name === "NotSupportedError") {
+                    status.textContent =
+                        "فرمت فایل موسیقی پشتیبانی نمی‌شود.";
+                }
+                else {
+                    status.textContent =
+                        "پخش آهنگ انجام نشد؛ دوباره تلاش کن.";
+                }
+
             }
 
         } else {
+
             audio.pause();
+
         }
 
     });
@@ -220,22 +298,30 @@ document.addEventListener("DOMContentLoaded", function () {
     // به‌روزرسانی زمان
     audio.addEventListener("timeupdate", function () {
 
-        if (Number.isFinite(audio.duration) && audio.duration > 0) {
+        if (
+            Number.isFinite(audio.duration) &&
+            audio.duration > 0
+        ) {
 
             progress.value =
                 (audio.currentTime / audio.duration) * 100;
 
         }
 
-        currentTime.textContent =
-            formatTime(audio.currentTime);
+        if (currentTime) {
+            currentTime.textContent =
+                formatTime(audio.currentTime);
+        }
 
     });
 
-    // حرکت نوار آهنگ
+    // تغییر موقعیت آهنگ
     progress.addEventListener("input", function () {
 
-        if (Number.isFinite(audio.duration)) {
+        if (
+            Number.isFinite(audio.duration) &&
+            audio.duration > 0
+        ) {
 
             audio.currentTime =
                 (Number(progress.value) / 100) * audio.duration;
@@ -246,14 +332,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // کنترل صدا
     volume.addEventListener("input", function () {
+
         audio.volume = Number(volume.value);
+
     });
 
     // پایان آهنگ
     audio.addEventListener("ended", function () {
 
         progress.value = 0;
-        currentTime.textContent = "00:00";
+
+        if (currentTime) {
+            currentTime.textContent = "00:00";
+        }
 
         toggle.textContent = "▶ پخش دوباره";
         status.textContent = "آهنگ تمام شد؛ دوباره گوش کن ❤️";
