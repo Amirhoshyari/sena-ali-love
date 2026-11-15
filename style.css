@@ -6,7 +6,7 @@
     --light-pink: #ff9fc5;
     --purple: #a855f7;
     --bg: #090711;
-    --card: rgba(255, 255, 255, 0.055);
+    --card: rgba(255,255,255,.055);
     --text: #fff1f7;
     --muted: #c7aeba;
 }
@@ -24,16 +24,14 @@ html {
 body {
     font-family: 'Vazirmatn', sans-serif;
     background:
-        radial-gradient(ellipse at 15% 15%, rgba(255, 45, 125, .17), transparent 40%),
-        radial-gradient(ellipse at 85% 55%, rgba(145, 60, 255, .13), transparent 40%),
+        radial-gradient(ellipse at 15% 15%, rgba(255,45,125,.17), transparent 40%),
+        radial-gradient(ellipse at 85% 55%, rgba(145,60,255,.13), transparent 40%),
         var(--bg);
     color: var(--text);
     min-height: 100vh;
     overflow-x: hidden;
     direction: rtl;
 }
-
-/* نورهای پس زمینه */
 
 body::before,
 body::after {
@@ -63,41 +61,45 @@ body::after {
 }
 
 @keyframes glow {
-    from {
-        transform: translate(0, 0) scale(1);
-    }
-    to {
-        transform: translate(50px, 40px) scale(1.3);
-    }
+    from { transform: translate(0,0) scale(1); }
+    to { transform: translate(50px,40px) scale(1.3); }
 }
 
-/* هدر */
+/* Header */
 
 header {
     width: 100%;
     padding: 22px 8%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     z-index: 5;
     backdrop-filter: blur(15px);
-    background: rgba(10, 7, 18, .45);
+    background: rgba(10,7,18,.65);
     border-bottom: 1px solid rgba(255,255,255,.07);
 }
 
 header h1 {
-    font-size: clamp(25px, 4vw, 36px);
+    font-size: clamp(25px,4vw,36px);
     font-weight: 800;
     color: white;
-    text-shadow: 0 0 20px rgba(255, 79, 145, .65);
+    text-shadow: 0 0 20px rgba(255,79,145,.65);
 }
 
-header h1 span {
+header h1 span,
+footer span {
     color: var(--pink);
 }
 
-/* بخش اصلی */
+header p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* Hero */
 
 .hero {
     min-height: 85vh;
@@ -107,14 +109,13 @@ header h1 span {
     align-items: center;
     text-align: center;
     padding: 80px 20px;
-    position: relative;
 }
 
 .hero h2 {
-    font-size: clamp(36px, 7vw, 75px);
+    font-size: clamp(36px,7vw,75px);
     font-weight: 800;
     line-height: 1.5;
-    background: linear-gradient(90deg, #fff, #ff83b5, #d9a4ff);
+    background: linear-gradient(90deg,#fff,#ff83b5,#d9a4ff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -123,36 +124,16 @@ header h1 span {
 
 .hero p {
     color: var(--muted);
-    font-size: clamp(15px, 2vw, 20px);
+    font-size: clamp(15px,2vw,20px);
     margin-top: 18px;
     line-height: 2.2;
     max-width: 650px;
-    animation: fadeUp 1.5s ease both;
 }
 
 @keyframes titleIn {
-    from {
-        opacity: 0;
-        transform: translateY(35px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(35px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* قلب اصلی */
 
 .main-heart {
     font-size: 85px;
@@ -163,46 +144,47 @@ header h1 span {
 }
 
 @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
+    0%,100% { transform: scale(1); }
     15% { transform: scale(1.18); }
     30% { transform: scale(1); }
     45% { transform: scale(1.12); }
 }
 
-/* دکمه ها */
+/* Buttons */
 
 button,
 .btn {
     font-family: inherit;
     border: none;
     cursor: pointer;
-    text-decoration: none;
     display: inline-block;
     color: white;
-    background: linear-gradient(135deg, #ff3988, #a855f7);
+    background: linear-gradient(135deg,#ff3988,#a855f7);
     padding: 13px 32px;
     border-radius: 50px;
     font-size: 16px;
     font-weight: 600;
-    box-shadow: 0 8px 30px rgba(255, 57, 136, .28);
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(255,57,136,.28);
     transition: .3s ease;
 }
 
 button:hover,
 .btn:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 35px rgba(255, 57, 136, .5);
+    box-shadow: 0 12px 35px rgba(255,57,136,.5);
 }
 
-/* بخش های سایت */
+/* Sections */
 
 section {
     padding: 75px 8%;
     text-align: center;
+    scroll-margin-top: 20px;
 }
 
 section h2 {
-    font-size: clamp(25px, 4vw, 38px);
+    font-size: clamp(25px,4vw,38px);
     margin-bottom: 35px;
     color: var(--light-pink);
 }
@@ -218,29 +200,36 @@ section h2::after {
     box-shadow: 0 0 15px var(--pink);
 }
 
-/* کارت های شیشه ای */
+/* Cards */
 
 .card,
 .counter,
 .love-letter,
 .memory-card {
     background: var(--card);
-    border: 1px solid rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255,255,255,.1);
     border-radius: 25px;
     padding: 30px;
     backdrop-filter: blur(18px);
-    box-shadow: 0 15px 45px rgba(0, 0, 0, .2);
+    box-shadow: 0 15px 45px rgba(0,0,0,.2);
     transition: .35s ease;
+}
+
+.card {
+    max-width: 850px;
+    margin: auto;
+    line-height: 2.5;
+    color: var(--muted);
 }
 
 .card:hover,
 .memory-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(255, 79, 145, .5);
-    box-shadow: 0 15px 45px rgba(255, 45, 125, .12);
+    border-color: rgba(255,79,145,.5);
+    box-shadow: 0 15px 45px rgba(255,45,125,.12);
 }
 
-/* شمارشگر */
+/* Counter */
 
 .counter {
     max-width: 750px;
@@ -255,37 +244,53 @@ section h2::after {
 
 #timer {
     color: white;
-    font-size: clamp(22px, 5vw, 40px);
+    font-size: clamp(22px,5vw,40px);
     font-weight: 800;
     direction: ltr;
-    text-shadow: 0 0 15px rgba(255, 79, 145, .5);
+    text-shadow: 0 0 15px rgba(255,79,145,.5);
 }
 
-/* گالری */
+.counter p {
+    color: var(--muted);
+    margin-top: 22px;
+}
+
+/* Memories */
 
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
     gap: 22px;
     max-width: 1000px;
     margin: auto;
 }
 
-.gallery img {
-    width: 100%;
-    height: 270px;
-    object-fit: cover;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,.12);
-    transition: .4s;
+.memory-card {
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.gallery img:hover {
-    transform: scale(1.04);
-    box-shadow: 0 0 30px rgba(255, 79, 145, .3);
+.memory-icon {
+    font-size: 55px;
+    color: var(--pink);
+    filter: drop-shadow(0 0 12px var(--pink));
+    margin-bottom: 15px;
 }
 
-/* نامه عاشقانه */
+.memory-card h3 {
+    color: var(--light-pink);
+    margin-bottom: 10px;
+}
+
+.memory-card p {
+    color: var(--muted);
+    line-height: 2;
+}
+
+/* Love letter */
 
 .love-letter {
     max-width: 750px;
@@ -296,102 +301,10 @@ section h2::after {
 
 .love-letter p {
     color: var(--muted);
+    margin-bottom: 20px;
 }
 
-/* پیام ها */
-
-.message {
-    max-width: 650px;
-    margin: 20px auto;
-    padding: 22px;
-    border-radius: 20px;
-    background: rgba(255, 79, 145, .08);
-    border-right: 3px solid var(--pink);
-    line-height: 2.2;
-    text-align: right;
-}
-
-/* فوتر */
-
-footer {
-    text-align: center;
-    padding: 35px 15px;
-    color: var(--muted);
-    border-top: 1px solid rgba(255,255,255,.08);
-    margin-top: 60px;
-}
-
-footer span {
-    color: var(--pink);
-}
-
-/* قلب های شناور */
-
-.heart {
-    position: fixed;
-    bottom: -30px;
-    color: #ff5b9d;
-    font-size: 20px;
-    pointer-events: none;
-    z-index: 10;
-    animation: floatHeart 7s linear forwards;
-    filter: drop-shadow(0 0 8px #ff3988);
-}
-
-@keyframes floatHeart {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-    15% {
-        opacity: .8;
-    }
-    85% {
-        opacity: .7;
-    }
-    100% {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* نمایش در موبایل */
-
-@media (max-width: 600px) {
-    header {
-        padding: 18px;
-    }
-
-    .hero {
-        min-height: 75vh;
-        padding: 50px 18px;
-    }
-
-    section {
-        padding: 55px 18px;
-    }
-
-    .main-heart {
-        font-size: 65px;
-    }
-
-    .counter,
-    .love-letter {
-        padding: 22px 15px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-    }
-}
-
-/* سه‌بعدی کردن پاکت نامه */
+/* Envelope */
 
 .envelope-section {
     padding: 80px 20px;
@@ -413,7 +326,7 @@ footer span {
     height: 100%;
     background: #ff6b9d;
     border-radius: 5px;
-    box-shadow: 0 15px 40px rgba(255, 50, 120, .3);
+    box-shadow: 0 15px 40px rgba(255,50,120,.3);
 }
 
 .envelope::before {
@@ -421,7 +334,7 @@ footer span {
     position: absolute;
     inset: 0;
     background: #ff91b7;
-    clip-path: polygon(0 0, 50% 55%, 100% 0);
+    clip-path: polygon(0 0,50% 55%,100% 0);
     transform-origin: top;
     transition: transform .8s ease;
     z-index: 4;
@@ -432,7 +345,7 @@ footer span {
     position: absolute;
     inset: 0;
     background: #f04483;
-    clip-path: polygon(0 100%, 50% 45%, 100% 100%);
+    clip-path: polygon(0 100%,50% 45%,100% 100%);
     z-index: 3;
 }
 
@@ -440,7 +353,7 @@ footer span {
     position: absolute;
     top: 45%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
     font-size: 38px;
     color: white;
     z-index: 5;
@@ -449,72 +362,25 @@ footer span {
 
 .letter-paper {
     position: absolute;
-    width: 85%;
-    height: 85%;
-    left: 7.5%;
-    top: 8%;
-    padding: 18px;
-    background: #fff5fa;
-    color: #a82c60;
-    border-radius: 8px;
-    z-index: 2;
-    opacity: 0;
-    overflow-y: auto;
-    transition: transform .9s ease, opacity .5s ease;
-    line-height: 2;
-}
-
-.envelope-wrapper.open .envelope::before {
-    transform: rotateX(180deg);
-    z-index: 1;
-}
-
-.envelope-wrapper.open .letter-paper {
-    opacity: 1;
-    transform: translateY(-125px);
-    z-index: 6;
-}
-
-.envelope-wrapper.open .envelope-heart {
-    opacity: 0;
-}
-
-.envelope-hint {
-    color: #ff9fc5;
-    margin-top: 20px;
-    animation: fadeUp 1.5s infinite alternate;
-}
-
-@media(max-width: 400px) {
-    .envelope-wrapper {
-        transform: scale(.9);
-    }
-}
-
-/* بهبود نمایش نامه عاشقانه */
-
-.letter-paper {
-    width: min(340px, calc(100vw - 40px));
+    width: min(340px,calc(100vw - 40px));
     height: auto;
     min-height: 210px;
     max-height: 280px;
     left: 50%;
     top: 50%;
     padding: 24px;
+    background: #fff5fa;
+    color: #a82c60;
     border-radius: 16px;
+    z-index: 2;
+    opacity: 0;
+    overflow-y: auto;
     line-height: 2.2;
     font-size: 15px;
     text-align: center;
-    transform: translate(-50%, -20%) scale(.85);
-    opacity: 0;
-    z-index: 6;
-    overflow-y: auto;
-    box-shadow: 0 15px 45px rgba(255, 60, 130, .25);
-}
-
-.envelope-wrapper.open .letter-paper {
-    opacity: 1;
-    transform: translate(-50%, -90%) scale(1);
+    transform: translate(-50%,-20%) scale(.85);
+    transition: transform .9s ease,opacity .5s ease;
+    box-shadow: 0 15px 45px rgba(255,60,130,.25);
 }
 
 .letter-paper h3 {
@@ -527,7 +393,27 @@ footer span {
     white-space: pre-line;
 }
 
-/* پخش کننده موسیقی عاشقانه */
+.envelope-wrapper.open .envelope::before {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-wrapper.open .letter-paper {
+    opacity: 1;
+    transform: translate(-50%,-90%) scale(1);
+    z-index: 6;
+}
+
+.envelope-wrapper.open .envelope-heart {
+    opacity: 0;
+}
+
+.envelope-hint {
+    color: var(--light-pink);
+    margin-top: 20px;
+}
+
+/* Music player */
 
 .music-section {
     padding: 80px 20px;
@@ -536,13 +422,14 @@ footer span {
 
 .music-player {
     max-width: 430px;
+    width: 100%;
     margin: 35px auto;
     padding: 35px 25px;
     border-radius: 28px;
-    background: rgba(255, 255, 255, .06);
-    border: 1px solid rgba(255, 105, 160, .25);
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,105,160,.25);
     backdrop-filter: blur(20px);
-    box-shadow: 0 15px 50px rgba(255, 50, 130, .12);
+    box-shadow: 0 15px 50px rgba(255,50,130,.12);
 }
 
 .music-cover {
@@ -554,18 +441,27 @@ footer span {
     justify-content: center;
     font-size: 55px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #ff3988, #a855f7);
-    box-shadow: 0 0 35px rgba(255, 57, 136, .4);
+    background: linear-gradient(135deg,#ff3988,#a855f7);
+    box-shadow: 0 0 35px rgba(255,57,136,.4);
+}
+
+.music-cover.playing {
+    animation: musicRotate 5s linear infinite;
+}
+
+@keyframes musicRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .music-player h3 {
-    color: #ff9fc5;
+    color: var(--light-pink);
     margin-bottom: 10px;
     font-size: 20px;
 }
 
 .music-player p {
-    color: #c7aeba;
+    color: var(--muted);
     font-size: 14px;
     margin-bottom: 25px;
 }
@@ -575,10 +471,16 @@ footer span {
     margin: 15px 0 25px;
 }
 
+.music-progress-container {
+    width: 100%;
+    margin-top: 15px;
+}
+
 .music-player input[type="range"] {
     width: 100%;
-    accent-color: #ff4f91;
+    accent-color: var(--pink);
     cursor: pointer;
+    touch-action: pan-y;
 }
 
 .music-time {
@@ -592,16 +494,109 @@ footer span {
 
 .music-player label {
     display: block;
-    color: #ff9fc5;
+    color: var(--light-pink);
     margin-bottom: 10px;
     font-size: 14px;
 }
 
-.music-cover.playing {
-    animation: musicRotate 5s linear infinite;
+.volume-box {
+    margin-top: 20px;
 }
 
-@keyframes musicRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+.music-status {
+    margin-top: 20px !important;
+    font-size: 13px !important;
+    color: var(--light-pink) !important;
+}
+
+/* Floating hearts */
+
+.heart {
+    position: fixed;
+    bottom: -30px;
+    color: #ff5b9d;
+    font-size: 20px;
+    pointer-events: none;
+    z-index: 10;
+    animation: floatHeart 7s linear forwards;
+    filter: drop-shadow(0 0 8px #ff3988);
+}
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    15% { opacity: .8; }
+    85% { opacity: .7; }
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Footer */
+
+footer {
+    text-align: center;
+    padding: 35px 15px;
+    color: var(--muted);
+    border-top: 1px solid rgba(255,255,255,.08);
+    margin-top: 60px;
+    line-height: 2.3;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 18px;
+    }
+
+    .hero {
+        min-height: 75vh;
+        padding: 50px 18px;
+    }
+
+    .hero h2 {
+        font-size: 34px;
+    }
+
+    section {
+        padding: 55px 18px;
+    }
+
+    .main-heart {
+        font-size: 65px;
+    }
+
+    .counter,
+    .love-letter {
+        padding: 22px 15px;
+    }
+
+    .music-player {
+        padding: 25px 18px;
+    }
+
+    .music-player button {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .envelope-wrapper {
+        transform: scale(.9);
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
 }
