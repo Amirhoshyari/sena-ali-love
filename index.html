@@ -1,22 +1,35 @@
 
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="theme-color" content="#090711">
+
+    <meta name="description"
+        content="دنیای عاشقانه سنا و علی؛ پر از عشق، خاطره و لحظه‌های زیبا">
+
     <title>دنیای عاشقانه سنا و علی ❤️</title>
-    <meta name="description" content="داستانی از عشق، خاطره و با هم بودن؛ دنیای سنا و علی">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
+    <!-- هدر سایت -->
     <header>
         <h1>سنا <span>♥</span> علی</h1>
+        <p>دنیای دونفره ما</p>
     </header>
 
+
     <main>
-        <section class="hero">
+
+        <!-- صفحه اصلی -->
+        <section class="hero" id="home">
+
             <div class="main-heart">♥</div>
 
             <h2>داستان ما هنوز ادامه دارد...</h2>
@@ -27,144 +40,292 @@
                 اینجا قصه‌ی ماست؛ قصه‌ی سنا و علی.
             </p>
 
-            <a href="#our-story" class="btn">شروع داستان ما ♥</a>
+            <a href="#our-story" class="btn">
+                شروع داستان ما ♥
+            </a>
+
         </section>
 
+
+        <!-- داستان ما -->
         <section id="our-story">
+
             <h2>داستان ما</h2>
 
             <div class="card">
+
                 <p>
                     از روزی که مسیرمان به هم رسید،
                     لحظه‌ها رنگ دیگری گرفتند.
+
                     شاید نتوان تمام احساسمان را با کلمات گفت،
-                    اما می‌توانیم هر روز یک صفحه تازه به داستانمان اضافه کنیم.
+                    اما می‌توانیم هر روز یک صفحه تازه
+                    به داستانمان اضافه کنیم.
+
+                    داستانی که با عشق نوشته می‌شود
+                    و با خاطرات زیباتر خواهد شد.
                 </p>
+
             </div>
+
         </section>
 
+
+        <!-- شمارشگر -->
         <section id="counter-section">
+
             <h2>از اولین روز آشنایی‌مان</h2>
 
             <div class="counter">
+
                 <h3>سنا و علی، از ۲۴ آبان ۱۴۰۴</h3>
-                <div id="timer">در حال محاسبه...</div>
-                <p>و هنوز هزاران لحظه‌ی قشنگ در انتظار ماست ❤️</p>
+
+                <div id="timer">
+                    در حال محاسبه...
+                </div>
+
+                <p>
+                    و هنوز هزاران لحظه قشنگ در انتظار ماست ❤️
+                </p>
+
             </div>
+
         </section>
 
+
+        <!-- خاطرات -->
         <section id="memories">
+
             <h2>دفتر خاطرات ما</h2>
 
             <div class="gallery">
+
                 <div class="memory-card">
-                    <div class="main-heart">♥</div>
+
+                    <div class="memory-icon">♥</div>
+
                     <h3>اولین آشنایی</h3>
-                    <p>شروع داستانی که هنوز ادامه دارد...</p>
+
+                    <p>
+                        شروع داستانی که هنوز ادامه دارد...
+                    </p>
+
                 </div>
 
+
                 <div class="memory-card">
-                    <div class="main-heart">♡</div>
+
+                    <div class="memory-icon">♡</div>
+
                     <h3>لحظه‌های قشنگ</h3>
-                    <p>خاطراتی که همیشه در قلبمان می‌مانند.</p>
+
+                    <p>
+                        خاطراتی که همیشه در قلبمان می‌مانند.
+                    </p>
+
                 </div>
 
+
                 <div class="memory-card">
-                    <div class="main-heart">♥</div>
+
+                    <div class="memory-icon">♥</div>
+
                     <h3>روزهای پیش رو</h3>
-                    <p>بهترین فصل داستانمان هنوز نوشته نشده است.</p>
+
+                    <p>
+                        بهترین فصل داستانمان هنوز نوشته نشده است.
+                    </p>
+
                 </div>
+
             </div>
+
         </section>
 
+
+        <!-- نامه عاشقانه -->
         <section id="love-letter">
+
             <h2>یک نامه از قلب ما</h2>
 
             <div class="love-letter">
+
                 <p>
                     ما شاید همیشه نتوانیم بهترین جمله‌ها را پیدا کنیم،
-                    اما می‌دانیم که بعضی احساس‌ها با هیچ جمله‌ای کامل
-                    توصیف نمی‌شوند. مهم این است که داستانمان را
+                    اما می‌دانیم بعضی احساس‌ها با هیچ جمله‌ای
+                    کامل توصیف نمی‌شوند.
+
+                    مهم این است که داستانمان را
                     با تمام لحظه‌های خوب و سختش ادامه بدهیم.
                 </p>
 
-                <br>
-
-                <button onclick="openLetter()">
+                <button type="button" onclick="openLetter()">
                     نامه عاشقانه‌مان را بخوان ♥
                 </button>
+
             </div>
+
         </section>
 
-<section class="envelope-section" id="special-letter">
-    <h2>یک نامه برای همیشه 💌</h2>
 
-    <div class="envelope-wrapper" id="loveEnvelope"
-         onclick="toggleEnvelope()">
+        <!-- پاکت نامه -->
+        <section class="envelope-section" id="special-letter">
 
-        <div class="envelope">
-            <div class="letter-paper">
-                <h3>سنا و علی ❤️</h3>
-                <p>
-                    بعضی لحظه‌ها آن‌قدر قشنگ‌اند
-                    که دوست داریم برای همیشه در قلبمان بمانند.
+            <h2>یک نامه برای همیشه 💌</h2>
 
-                    ما هنوز در حال نوشتن داستانمان هستیم؛
-                    داستانی پر از لبخند، خاطره و امید.
+            <div
+                class="envelope-wrapper"
+                id="loveEnvelope"
+                onclick="toggleEnvelope()"
+                role="button"
+                tabindex="0"
+                aria-label="باز و بسته کردن نامه عاشقانه"
+            >
 
-                    بهترین قسمت این داستان،
-                    صفحه‌هایی است که هنوز نرسیده‌اند...
-                </p>
-                <h3>با عشق، از طرف هر دوی ما ❤️</h3>
+                <div class="envelope">
+
+                    <div class="letter-paper">
+
+                        <h3>سنا و علی ❤️</h3>
+
+                        <p>
+                            بعضی لحظه‌ها آن‌قدر قشنگ‌اند
+                            که دوست داریم برای همیشه
+                            در قلبمان بمانند.
+
+                            ما هنوز در حال نوشتن داستانمان هستیم؛
+                            داستانی پر از لبخند، خاطره و امید.
+
+                            بهترین قسمت این داستان،
+                            صفحه‌هایی است که هنوز نرسیده‌اند...
+                        </p>
+
+                        <h3>با عشق، از طرف هر دوی ما ❤️</h3>
+
+                    </div>
+
+                    <div class="envelope-heart">♥</div>
+
+                </div>
+
             </div>
-            <div class="envelope-heart">♥</div>
-        </div>
-    </div>
 
-    <p class="envelope-hint">
-        برای باز کردن نامه روی پاکت کلیک کن
-    </p>
-</section>
+            <p class="envelope-hint">
+                برای باز و بسته کردن نامه روی پاکت کلیک کن
+            </p>
 
-<section class="music-section" id="our-music">
-    <h2>آهنگ خاطره‌انگیز ما 🎶</h2>
+        </section>
 
-    <div class="music-player">
-        <div class="music-cover">🎧</div>
 
-        <h3>آهنگ اختصاصی سنا و علی</h3>
-        <p>یک موسیقی برای لحظه‌های دونفره‌مان ❤️</p>
+        <!-- موسیقی عاشقانه -->
+        <section class="music-section" id="our-music">
 
-        <audio id="loveAudio" preload="metadata">
-            <source src="music/love-song.mp3" type="audio/mpeg">
-        </audio>
+            <h2>آهنگ خاطره‌انگیز ما 🎵</h2>
 
-        <button id="musicToggle" type="button">
-            ▶ پخش موسیقی
-        </button>
+            <div class="music-player">
 
-        <input type="range" id="musicProgress"
-               value="0" min="0" max="100"
-               aria-label="موقعیت آهنگ">
+                <div class="music-cover" id="musicCover">
+                    🎧
+                </div>
 
-        <div class="music-time">
-            <span id="currentTime">00:00</span>
-            <span id="duration">00:00</span>
-        </div>
+                <h3>آهنگ اختصاصی سنا و علی</h3>
 
-        <label for="volumeControl">صدای موسیقی</label>
-        <input type="range" id="volumeControl"
-               min="0" max="1" step="0.01" value="0.7">
-    </div>
-</section>
+                <p>
+                    موسیقی لحظه‌های دونفره‌مان ❤️
+                </p>
+
+                <!-- فایل موسیقی داخل پوشه music است -->
+                <audio id="loveAudio" preload="metadata">
+
+                    <source
+                        src="music/love-song.mp3"
+                        type="audio/mpeg"
+                    >
+
+                    مرورگر شما از پخش موسیقی پشتیبانی نمی‌کند.
+
+                </audio>
+
+
+                <!-- دکمه پخش -->
+                <button id="musicToggle" type="button">
+                    ▶ پخش موسیقی
+                </button>
+
+
+                <!-- نوار پیشرفت -->
+                <div class="music-progress-container">
+
+                    <input
+                        type="range"
+                        id="musicProgress"
+                        min="0"
+                        max="100"
+                        value="0"
+                        step="0.1"
+                        aria-label="موقعیت آهنگ"
+                    >
+
+                    <div class="music-time">
+
+                        <span id="currentTime">00:00</span>
+
+                        <span id="duration">00:00</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- کنترل صدا -->
+                <div class="volume-box">
+
+                    <label for="volumeControl">
+                        🔊 میزان صدا
+                    </label>
+
+                    <input
+                        type="range"
+                        id="volumeControl"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value="0.7"
+                    >
+
+                </div>
+
+
+                <!-- وضعیت آهنگ -->
+                <p id="musicStatus" class="music-status">
+                    برای شنیدن آهنگ دکمه پخش را بزن ❤️
+                </p>
+
+            </div>
+
+        </section>
 
     </main>
 
+
+    <!-- فوتر -->
     <footer>
-        <p>ساخته شده با عشق برای <span>سنا و علی ♥</span></p>
-        <p>داستان ما، داستانی بدون پایان...</p>
+
+        <p>
+            ساخته شده با عشق برای
+            <span>سنا و علی ♥</span>
+        </p>
+
+        <p>
+            داستان ما، داستانی بدون پایان...
+        </p>
+
     </footer>
 
+
+    <!-- اتصال جاوااسکریپت -->
     <script src="script.js"></script>
+
 </body>
+
 </html>
